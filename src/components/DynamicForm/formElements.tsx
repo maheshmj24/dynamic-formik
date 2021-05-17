@@ -24,14 +24,12 @@ export const MyTextInput = (props: any) => {
 export const MyPhoneInput = ({ label, ...props }: any) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta, helpers] = useField(props.name);
-
+  const [, meta, helpers] = useField(props);
   return (
     <>
       <label htmlFor={props.id || props.name}>{label}</label>
       <PhoneInput
         {...props}
-        {...field}
         onChange={(value) => {
           if (!meta.touched) helpers.setTouched(true, true);
           helpers.setValue(value);
