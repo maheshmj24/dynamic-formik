@@ -1,0 +1,40 @@
+/* Split the screen in half */
+
+.title {
+    width: 100%;
+}
+
+.split {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding: 50px;
+}
+
+
+/* Control the left side */
+
+.left {
+    left: 0;
+    width: 40%;
+    background-color: white;
+    color: #1a202c;
+    /* background-image: url(./contosoready.png); */
+    background-size: cover;
+}
+
+/* Control the right side */
+
+.right {
+    right: 0;
+    width: 60%;
+    /* background-color: red; */
+}
+
+.form{
+    margin: 0 auto;
+    padding-left: 50px;
+  }

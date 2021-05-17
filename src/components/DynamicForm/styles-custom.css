@@ -1,0 +1,26 @@
+﻿input[type="email"],
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 75%;
+}
+.PhoneInput{
+  width: 75%;
+}
+
+label {
+  margin-top: 1rem;
+}
+
+label.checkbox {
+  font-weight: normal;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+}
+
+#countrycode-input {
+  width: 200px;
+}
