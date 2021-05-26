@@ -24,3 +24,7 @@ button[type="submit"] {
 #countrycode-input {
   width: 200px;
 }
+
+.loader{
+  text-align: center;
+}
