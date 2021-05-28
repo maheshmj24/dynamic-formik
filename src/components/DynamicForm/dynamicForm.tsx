@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Formik, Form } from "formik";
+import { Spinner, SpinnerSize } from "@fluentui/react/lib/Spinner";
+import { Form, Formik } from "formik";
+import React, { useEffect, useState } from "react";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import * as Yup from "yup";
 import {
-  MyTextInput,
   MyCheckbox,
-  MySelect,
   MyPhoneInput,
+  MySelect,
+  MyTextInput,
 } from "./formElements";
-import { isValidPhoneNumber } from "react-phone-number-input";
 import formSchemaJSON from "./formSchema";
-import { Spinner, SpinnerSize } from "@fluentui/react/lib/Spinner";
 
 interface formSchemaElement {
   type: string;
@@ -128,7 +128,7 @@ const SignupForm = () => {
     );
   }
 
-  if (status === "loading" || status === 'submitting') {
+  if (status === "loading" || status === "submitting") {
     return (
       <div className="loader">
         <h4>{status[0].toUpperCase() + status.substring(1) + "..."}</h4>
@@ -140,31 +140,31 @@ const SignupForm = () => {
   return (
     <div className="form">
       {status && status === "loaded" && (
-          <Formik
-            initialValues={initialValues}
-            validationSchema={Yup.object(validationSchema)}
-            onSubmit={(values, { setSubmitting }) => {
-              setStatus("submitting");
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                console.log(values);
-                setSubmitting(true);
-                setStatus("successfulsubmission");
-              }, 400);
-            }}
-          >
-            <Form>
-              {Object.keys(formSchema).map((key) => {
-                return getFormElem(key, formSchema[key]);
-              })}
+        <Formik
+          initialValues={initialValues}
+          validationSchema={Yup.object(validationSchema)}
+          onSubmit={(values, { setSubmitting }) => {
+            setStatus("submitting");
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              console.log(values);
+              setSubmitting(true);
+              setStatus("successfulsubmission");
+            }, 400);
+          }}
+        >
+          <Form>
+            {Object.keys(formSchema).map((key) => {
+              return getFormElem(key, formSchema[key]);
+            })}
 
-              <MyCheckbox
-                name="acceptedTerms"
-                labeltext="I accept the terms and conditions"
-              />
-              <button type="submit">Submit</button>
-            </Form>
-          </Formik>
+            <MyCheckbox
+              name="acceptedTerms"
+              labeltext="I accept the terms and conditions"
+            />
+            <button type="submit">Submit</button>
+          </Form>
+        </Formik>
       )}
     </div>
   );

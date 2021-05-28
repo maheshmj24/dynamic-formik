@@ -14,7 +14,6 @@
     padding: 50px;
 }
 
-
 /* Control the left side */
 
 .left {
@@ -34,7 +33,7 @@
     /* background-color: red; */
 }
 
-.form{
+.form {
     margin: 0 auto;
     padding-left: 50px;
-  }
+}

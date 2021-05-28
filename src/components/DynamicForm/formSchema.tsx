@@ -9,7 +9,7 @@ const formSchema = {
       "Attendees",
       "Speaker",
       "Media Partner",
-      "Media"
+      "Media",
     ],
   },
   firstname: {
@@ -311,7 +311,7 @@ const formSchema = {
       "Zambia",
       "Zimbabwe",
     ],
-  }
+  },
 };
 
 export default formSchema;

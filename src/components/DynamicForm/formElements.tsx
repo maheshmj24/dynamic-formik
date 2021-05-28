@@ -1,10 +1,10 @@
-import React from "react";
-import { useField } from "formik";
 import styled from "@emotion/styled";
-import "./styles.css";
-import "./styles-custom.css";
-import "react-phone-number-input/style.css";
+import { useField } from "formik";
+import React from "react";
 import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import "./styles-custom.css";
+import "./styles.css";
 
 export const MyTextInput = (props: any) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
