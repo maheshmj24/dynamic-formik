@@ -8,10 +8,10 @@ import {
   MyPhoneInput,
   MySelect,
   MyTextInput,
-} from "./formElements";
-import formSchemaJSON from "./formSchema";
+} from './formElements';
+import formSchemaJSON from './formSchema';
 
-interface formSchemaElement {
+interface IFormSchemaElement {
   type: string;
   label: string;
   placeholder: string;
@@ -21,28 +21,31 @@ interface formSchemaElement {
   condition_field: string;
   condition_values: Array<string>;
 }
+
+// Form Schema extracted from the formSchema.tsx
 const formSchema: any = formSchemaJSON;
-const SignupForm = () => {
+
+const SignupForm: React.FC = () => {
   const [initialValues, setInitialValues] = useState({});
   const [validationSchema, setValidationSchema] = useState({});
-  const [status, setStatus] = useState("loading");
+  const [status, setStatus] = useState('loading');
 
-  const getFormElem = (elemName: string, elemSchema: formSchemaElement) => {
+  const getFormElem = (elemName: string, elemSchema: IFormSchemaElement) => {
     const props = {
       name: elemName,
-      type: elemSchema.type === "phone" ? "text" : elemSchema.type,
+      type: elemSchema.type === 'phone' ? 'text' : elemSchema.type,
       label: elemSchema.label,
       placeholder: elemSchema.placeholder,
       options: elemSchema.options,
     };
 
-    if (elemSchema.type === "text" || elemSchema.type === "email") {
+    if (elemSchema.type === 'text' || elemSchema.type === 'email') {
       return <MyTextInput key={elemName} {...props} />;
     }
-    if (elemSchema.type === "select") {
+    if (elemSchema.type === 'select') {
       return <MySelect key={elemName} {...props} />;
     }
-    if (elemSchema.type === "phone") {
+    if (elemSchema.type === 'phone') {
       return <MyPhoneInput key={elemName} {...props} />;
     }
   };
@@ -52,23 +55,23 @@ const SignupForm = () => {
     const validationSchema: any = {};
 
     for (var key of Object.keys(formSchema)) {
-      initialValues[key] = "";
+      initialValues[key] = '';
 
-      if (formSchema[key].type === "text") {
+      if (formSchema[key].type === 'text') {
         validationSchema[key] = Yup.string();
-      } else if (formSchema[key].type === "email") {
-        validationSchema[key] = Yup.string().email("Invalid email address");
-      } else if (formSchema[key].type === "select") {
+      } else if (formSchema[key].type === 'email') {
+        validationSchema[key] = Yup.string().email('Invalid email address');
+      } else if (formSchema[key].type === 'select') {
         validationSchema[key] = Yup.string().oneOf(formSchema[key].options);
-      } else if (formSchema[key].type === "checkbox") {
+      } else if (formSchema[key].type === 'checkbox') {
         validationSchema[key] = Yup.boolean().oneOf(
           [true],
-          "You must accept the terms and conditions."
+          'You must accept the terms and conditions.'
         );
-      } else if (formSchema[key].type === "phone") {
+      } else if (formSchema[key].type === 'phone') {
         validationSchema[key] = Yup.string().test(
-          "Test",
-          "Invalid Mobile Number",
+          'Test',
+          'Invalid Mobile Number',
           (value) => {
             if (value) {
               return isValidPhoneNumber(value);
@@ -80,7 +83,7 @@ const SignupForm = () => {
 
       //Required
       if (formSchema[key].required) {
-        validationSchema[key] = validationSchema[key].required("Required");
+        validationSchema[key] = validationSchema[key].required('Required');
       }
 
       //Conditional Required
@@ -91,7 +94,7 @@ const SignupForm = () => {
           {
             //is: formSchema[key].condition_values,
             is: (val: string) => conditionValues.includes(val),
-            then: validationSchema[key].required("Required"),
+            then: validationSchema[key].required('Required'),
           }
         );
       }
@@ -104,17 +107,17 @@ const SignupForm = () => {
     setValidationSchema({
       ...validationSchema,
       acceptedTerms: Yup.boolean()
-        .required("Required")
-        .oneOf([true], "You must accept the terms and conditions."),
+        .required('Required')
+        .oneOf([true], 'You must accept the terms and conditions.'),
     });
   }
 
   useEffect(() => {
     getInitialValues(formSchema);
-    setStatus("loaded");
+    setStatus('loaded');
   }, []);
 
-  if (status === "successfulsubmission") {
+  if (status === 'successfulsubmission') {
     return (
       <div>
         <h1>Successfully registered.</h1>
@@ -128,28 +131,28 @@ const SignupForm = () => {
     );
   }
 
-  if (status === "loading" || status === "submitting") {
+  if (status === 'loading' || status === 'submitting') {
     return (
-      <div className="loader">
-        <h4>{status[0].toUpperCase() + status.substring(1) + "..."}</h4>
+      <div className='loader'>
+        <h4>{status[0].toUpperCase() + status.substring(1) + '...'}</h4>
         <Spinner size={SpinnerSize.large} />
       </div>
     );
   }
 
   return (
-    <div className="form">
-      {status && status === "loaded" && (
+    <div className='form'>
+      {status && status === 'loaded' && (
         <Formik
           initialValues={initialValues}
           validationSchema={Yup.object(validationSchema)}
           onSubmit={(values, { setSubmitting }) => {
-            setStatus("submitting");
+            setStatus('submitting');
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
               console.log(values);
               setSubmitting(true);
-              setStatus("successfulsubmission");
+              setStatus('successfulsubmission');
             }, 400);
           }}
         >
@@ -159,10 +162,10 @@ const SignupForm = () => {
             })}
 
             <MyCheckbox
-              name="acceptedTerms"
-              labeltext="I accept the terms and conditions"
+              name='acceptedTerms'
+              labeltext='I accept the terms and conditions'
             />
-            <button type="submit">Submit</button>
+            <button type='submit'>Submit</button>
           </Form>
         </Formik>
       )}
