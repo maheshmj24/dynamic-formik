@@ -7,9 +7,10 @@ import {
   MyCheckbox,
   MyPhoneInput,
   MySelect,
-  MyTextInput,
+  MyTextInput
 } from './formElements';
-import formSchemaJSON from './formSchema';
+//import formSchemaJSON from './formSchema';
+import formSchemaJSON from './formSchema.json';
 
 interface IFormSchemaElement {
   type: string;
@@ -22,7 +23,7 @@ interface IFormSchemaElement {
   condition_values: Array<string>;
 }
 
-// Form Schema extracted from the formSchema.tsx
+// Form Schema extracted from the formSchema.tsx or json
 const formSchema: any = formSchemaJSON;
 
 const SignupForm: React.FC = () => {
